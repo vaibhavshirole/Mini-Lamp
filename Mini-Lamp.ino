@@ -2,19 +2,21 @@
 #include <Adafruit_NeoPixel.h>
 
 /* Global variables and defines */
-int ENABLE_INTERNAL = 11;   //power the internal neopixel
-int RGB_DATA_IN  = 12;    //address the internal neopixel
+int ENABLE_INTERNAL = 11;           //power the internal neopixel
+int RGB_DATA_IN  = 12;              //address the internal neopixel
 #define NUM_NEOPIXELS 1
 
-const int sensorPin = A0; //pin that the poteniometer is on
-const int ledPin = 25;    //onboard blue LED for debugging
+const int sensorPin = A0;           //pin that the poteniometer is on
+const int ledPin = 25;              //onboard blue LED for debugging
 
-const int switchPin = D1;  //pin that the switch is on
-int state = 0;              //keeps track of whether the system is on or off
+const int switchPin = D1;           //pin that the switch is on
+int state = 0;                      //keeps track of whether the system is on or off
 
 /* Built-in NeoPixel RGB LED needs an object to be declared to work */
-Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800); //initialize neopixels object
+Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
 
+//==================//==================//==================//==================//
+// SETUP FUNCTIONS: 
 
 /*   
  *    This function is very important.
@@ -27,26 +29,24 @@ void setup() {
   /* Configure serial output for debugging */
   Serial.begin(115200);
   while (!Serial);
-
   
   /* Start the built-in NeoPixel RGB LED */
   pixels.begin(); //start neopixels
   pinMode(ENABLE_INTERNAL, OUTPUT);
   digitalWrite(ENABLE_INTERNAL, HIGH);
-
   
   /* Start the pin that the potentiometer is connected to */
   pinMode(sensorPin, INPUT);
 
-
   /* Start the pin that the switch is connected to */
   pinMode(switchPin, INPUT);
-
   
   /* Start an on-board blue LED for debugging */
   pinMode(ledPin, OUTPUT);
 }
 
+//==================//==================//==================//==================//
+// HELPER FUNCTIONS: 
 
 /* 
  *  Helper function to handle color 
@@ -58,6 +58,8 @@ void setPixel(int pixel, int color, long unsigned brightness){
   pixels.setPixelColor(pixel, pixels.ColorHSV(color*64, 255, brightness));
 }
 
+//==================//==================//==================//==================//
+// MAIN():
 
 /*  
  *   This is the main function.
@@ -67,29 +69,28 @@ void setPixel(int pixel, int color, long unsigned brightness){
 */
 void loop(){
 
-  //read the switch state
-  state = digitalRead(switchPin);
-  Serial.println(state);
-  
-  if (state == HIGH) {
-    // turn LED off: (the output is 1)
-    digitalWrite(ledPin, HIGH);
+  /* Check whether the switch is set to on or off */
+  if( digitalRead(switchPin) == HIGH ){
 
+    /* Off (1) */
+    digitalWrite(ledPin, HIGH);                     //toggle built-in LED
+    
     pixels.clear();
-    pixels.setPixelColor(0, pixels.Color(0, 0, 0));
+    pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
     pixels.show();
     
-  } else {
-    // turn LED on: (the output is 0)
-    digitalWrite(ledPin, LOW);
+  }
+  else
+  {
 
-    //read potentiometer value
-    int sensorValue = analogRead(sensorPin);
-    //Serial.println(sensorValue);    //between 0 and 1024
-  
-    //change neopixel colors with potentiometer
+    /* On (0) */
+    digitalWrite(ledPin, LOW);                      //toggle built-in LED
+    
+    int sensorValue = analogRead(sensorPin);        //read potentiometer value
+    //Serial.println(sensorValue);                  //between 0 and 1024
+    
     for(int i=0; i<NUM_NEOPIXELS; i++){
-      setPixel(i, sensorValue, 255);
+      setPixel(i, sensorValue, 255);                //change neopixel colors with potentiometer
     }
     pixels.show();
   }
