@@ -69,30 +69,32 @@ void setPixel(int pixel, int color, long unsigned brightness){
 */
 void loop(){
 
-  /* Check whether the switch is set to on or off */
-  if( digitalRead(switchPin) == HIGH ){
-
-    /* Off (1) */
-    digitalWrite(ledPin, HIGH);                     //toggle built-in LED
-    
-    pixels.clear();
-    pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
-    pixels.show();
-    
-  }
-  else
-  {
+  //TO-DO: 
+  //  ADD MODE SO THAT WHEN IT TURNS ALL THE WAY TO THE LEFT IT CYCLES THROUGH THE COLORS ON ITS OWN.
+  //  HOW IT SHOULD WORKS: IS IT GOES THROUGH EVERY COLOR, HIGHER VALUES AS YOU TURN TO LEFT
+  //  AND LOWER VALUES AS YOU TURN TO RIGHT. ALL THE WAY TO RED WIRE, IT TURNS OFF. ALL THE WAY
+  //  TO LEFT IT CYCLES THROUGH COLORS AUTOMATICALLY
 
     /* On (0) */
     digitalWrite(ledPin, LOW);                      //toggle built-in LED
     
     int sensorValue = analogRead(sensorPin);        //read potentiometer value
-    //Serial.println(sensorValue);                  //between 0 and 1024
-    
-    for(int i=0; i<NUM_NEOPIXELS; i++){
-      setPixel(i, sensorValue, 255);                //change neopixel colors with potentiometer
-    }
-    pixels.show();
-  }
+    Serial.println(sensorValue);                    //between 0 and 1024
 
+    /* Check whether the potentiometer is turned all the way to right to turn off light */
+    if(sensorValue < 10) {
+      /* Off (1) */
+      digitalWrite(ledPin, HIGH);                     //toggle built-in LED
+      
+      pixels.clear();
+      pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
+      pixels.show();
+    }
+    else
+    {
+      for(int i=0; i<NUM_NEOPIXELS; i++){
+        setPixel(i, sensorValue, 255);                //change neopixel colors with potentiometer
+      }
+      pixels.show();  
+    }
 }
