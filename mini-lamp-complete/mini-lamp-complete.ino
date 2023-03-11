@@ -28,7 +28,7 @@ void setup() {
   
   /* Configure serial output for debugging */
   Serial.begin(115200);
-  while (!Serial);
+  while (!Serial);          //TO-DO: DELETE THIS AND REPLACE WITH JUST A DELAY SO THAT THIS WORKS WITHOUT SERIAL MONITOR
   
   /* Start the built-in NeoPixel RGB LED */
   pixels.begin(); //start neopixels
