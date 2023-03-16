@@ -47,6 +47,23 @@ void setup() {
  *    Handles color changing using the potentiometer 
  */
 void setPixel(int pixel, int color, long unsigned brightness){
+  /*
+  Want a specific color?
+  Call this function and give it a number in the desired range...
+    ORANGE:         0-100
+    YELLOW:         100-200
+    GREEN:          200-300
+    TURIOISE:       300-400
+    LIGHT BLUE:     400-500
+    BLUE:           500-600
+    DARK BLUE:      600-700
+    PURPLE:         700-800
+    PINK:           800-900
+    DARK PINK:      900-1000
+    RED:            1000-1024
+  */
+  
+  
   brightness*=brightness;
   brightness/=255;
   pixels.setPixelColor(pixel, pixels.ColorHSV(color*64, 255, brightness));
@@ -70,8 +87,24 @@ void pixelOff(void){
  * Helper function:
  *    Cycles through all possible colors
  */
-void pixelColorCycle(int speed){
-  ////////////////////////////// TO-DO: IMPLEMENT THIS METHOD SO THAT IT CYCLES THROUGH RAINBOW
+void pixelColorCycle(int fade_speed, int cycleValue){ 
+  for (int j=0; j<1024; j++){    
+    for (int i=0; i<NUM_NEOPIXELS; i++){
+      setPixel(i, j, 255);
+    }
+    pixels.show();
+
+    Serial.print("Current value being sent to setPixel: ");
+    Serial.println(j);
+    
+    delay(fade_speed);
+    
+    int sensorValue = analogRead(sensorPin);
+    if( sensorValue > cycleValue){
+      return;
+    }
+    
+  }
 }
 
 
@@ -85,6 +118,10 @@ void pixelColorCycle(int speed){
  *   should be.
 */
 void loop(){
+  
+  /* Define the off and color cycle thresholds. These are between 0-1024 */
+  int offValue = 1020;                            //potentiometer turned all the way left
+  int cycleValue = 6;                             //potentiometer turned all the way right
 
   /* On (0) */
   digitalWrite(ledPin, LOW);                      //toggle built-in LED
@@ -92,23 +129,23 @@ void loop(){
   int sensorValue = analogRead(sensorPin);        //read potentiometer value
   Serial.println(sensorValue);                    //between 0 and 1024
 
-  /* Check whether the potentiometer is turned all the way to right to turn off light */
-  if (sensorValue < 10) {
+  /* Check whether the potentiometer is turned to the left to turn off light */
+  if (sensorValue > offValue) {
     pixelOff();
     
   }
-  else if (sensorValue > 1015){
-    pixelColorCycle(10); 
-         
+  else if (sensorValue < cycleValue){
+    int speed = 100;                              //a larger number here means slower cycle
+    pixelColorCycle(speed, cycleValue);
+             
   }
   else
   {
     for (int i=0; i<NUM_NEOPIXELS; i++){
-      setPixel(i, sensorValue, 255);               //change neopixel colors with potentiometer
+      setPixel(i, sensorValue, 255);              //change neopixel colors with potentiometer
     }
-    pixels.show();  
+    pixels.show();
     
   }
     
-  return 0;
 }
