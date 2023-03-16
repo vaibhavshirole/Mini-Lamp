@@ -2,15 +2,14 @@
 #include <Adafruit_NeoPixel.h>
 
 /* Global variables and defines */
-int ENABLE_INTERNAL = 11;           //power the internal neopixel
-int RGB_DATA_IN  = 12;              //address the internal neopixel
-#define NUM_NEOPIXELS 1
-
-const int sensorPin = A0;           //pin that the poteniometer is on
-const int ledPin = 25;              //onboard blue LED for debugging
+#define   NUM_NEOPIXELS       1          //say how many RGB LEDs we have
+int       ENABLE_INTERNAL =   11;        //power the internal neopixel
+int       RGB_DATA_IN =       12;        //address the internal neopixel
+const int sensorPin =         A0;        //pin that the poteniometer is on
 
 /* Built-in NeoPixel RGB LED needs an object to be declared to work */
 Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
+
 
 //==================//==================//==================//==================//
 // SETUP FUNCTIONS: 
@@ -34,10 +33,8 @@ void setup() {
   
   /* Start the pin that the potentiometer is connected to */
   pinMode(sensorPin, INPUT);
-
-  /* Start an on-board blue LED for debugging */
-  pinMode(ledPin, OUTPUT);
 }
+
 
 //==================//==================//==================//==================//
 // HELPER FUNCTIONS: 
@@ -45,20 +42,20 @@ void setup() {
 /* 
  *  Helper function:
  *    Handles changing the color of any NeoPixel. 
-
-  Want a specific color?
-  Call setPixel and give it a number in the desired range...
-    ORANGE:         0-100
-    YELLOW:         100-200
-    GREEN:          200-300
-    TURIOISE:       300-400
-    LIGHT BLUE:     400-500
-    BLUE:           500-600
-    DARK BLUE:      600-700
-    PURPLE:         700-800
-    PINK:           800-900
-    DARK PINK:      900-1000
-    RED:            1000-1024
+ *
+ *  Want a specific color?
+ *  -> Call setPixel and give it a number in the desired range...
+ *      ORANGE:         0-100
+ *      YELLOW:         100-200
+ *      GREEN:          200-300
+ *      TURIOISE:       300-400
+ *      LIGHT BLUE:     400-500
+ *      BLUE:           500-600
+ *      DARK BLUE:      600-700
+ *      PURPLE:         700-800
+ *      PINK:           800-900
+ *      DARK PINK:      900-1000
+ *      RED:            1000-1024
  */
 void setPixel(int pixel, int color, long unsigned brightness){
   brightness*=brightness;
@@ -72,8 +69,6 @@ void setPixel(int pixel, int color, long unsigned brightness){
  *    Turns the lights off on the NeoPixel
  */
 void pixelOff(void){
-  digitalWrite(ledPin, HIGH);                     //toggle built-in LED
-  
   pixels.clear();
   pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
   pixels.show();
@@ -120,12 +115,10 @@ void loop(){
   int offValue = 1020;                            //potentiometer turned all the way left
   int cycleValue = 6;                             //potentiometer turned all the way right
 
-  /* On (0) */
-  digitalWrite(ledPin, LOW);                      //toggle built-in LED
-  
+  /* Get the value of the potentiometer */
   int sensorValue = analogRead(sensorPin);        //read potentiometer value
-  Serial.println(sensorValue);                    //between 0 and 1024
-
+  Serial.println(sensorValue);                    //tell us potentiometer value
+  
   /* Check whether the potentiometer is turned to the left to turn off light */
   if (sensorValue > offValue) {
     pixelOff();
