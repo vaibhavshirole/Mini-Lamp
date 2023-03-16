@@ -44,12 +44,10 @@ void setup() {
 
 /* 
  *  Helper function:
- *    Handles color changing using the potentiometer 
- */
-void setPixel(int pixel, int color, long unsigned brightness){
-  /*
+ *    Handles changing the color of any NeoPixel. 
+
   Want a specific color?
-  Call this function and give it a number in the desired range...
+  Call setPixel and give it a number in the desired range...
     ORANGE:         0-100
     YELLOW:         100-200
     GREEN:          200-300
@@ -61,9 +59,8 @@ void setPixel(int pixel, int color, long unsigned brightness){
     PINK:           800-900
     DARK PINK:      900-1000
     RED:            1000-1024
-  */
-  
-  
+ */
+void setPixel(int pixel, int color, long unsigned brightness){
   brightness*=brightness;
   brightness/=255;
   pixels.setPixelColor(pixel, pixels.ColorHSV(color*64, 255, brightness));
