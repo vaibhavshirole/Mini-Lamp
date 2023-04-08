@@ -61,6 +61,8 @@ void setPixel(int pixel, int color, long unsigned brightness){
   brightness*=brightness;
   brightness/=255;
   pixels.setPixelColor(pixel, pixels.ColorHSV(color*64, 255, brightness));
+
+  pixels.show();
 }
 
 
@@ -71,6 +73,7 @@ void setPixel(int pixel, int color, long unsigned brightness){
 void pixelOff(void){
   pixels.clear();
   pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
+  
   pixels.show();
 }
 
@@ -79,7 +82,7 @@ void pixelOff(void){
  * Helper function:
  *    Cycles through all possible colors
  */
-void pixelColorCycle(int fade_speed, int cycleValue){ 
+void pixelColorCycle(int fade_speed, int cycleThreshold){ 
   for (int j=0; j<1024; j++){    
     for (int i=0; i<NUM_NEOPIXELS; i++){
       setPixel(i, j, 255);
@@ -92,7 +95,7 @@ void pixelColorCycle(int fade_speed, int cycleValue){
     delay(fade_speed);
     
     int sensorValue = analogRead(sensorPin);
-    if( sensorValue > cycleValue){
+    if( sensorValue > cycleThreshold){
       return;
     }
     
@@ -112,30 +115,27 @@ void pixelColorCycle(int fade_speed, int cycleValue){
 void loop(){
   
   /* Define the off and color cycle thresholds. These are between 0-1024 */
-  int offValue = 1020;                            //potentiometer turned all the way left
-  int cycleValue = 6;                             //potentiometer turned all the way right
+  int offThreshold = 1020;                            //potentiometer turned all the way left
+  int cycleThreshold = 6;                             //potentiometer turned all the way right
 
   /* Get the value of the potentiometer */
   int sensorValue = analogRead(sensorPin);        //read potentiometer value
   Serial.println(sensorValue);                    //tell us potentiometer value
   
   /* Check whether the potentiometer is turned to the left to turn off light */
-  if (sensorValue > offValue) {
-    pixelOff();
-    
+  if (sensorValue > offThreshold) 
+  {
+    pixelOff();    
   }
-  else if (sensorValue < cycleValue){
+  else if (sensorValue < cycleThreshold)
+  {
     int speed = 100;                              //a larger number here means slower cycle
-    pixelColorCycle(speed, cycleValue);
+    pixelColorCycle(speed, cycleThreshold);
              
   }
   else
   {
-    for (int i=0; i<NUM_NEOPIXELS; i++){
-      setPixel(i, sensorValue, 255);              //change neopixel colors with potentiometer
-    }
-    pixels.show();
-    
+    setPixel(0, sensorValue, 255);              //change neopixel colors with potentiometer   
   }
     
 }
