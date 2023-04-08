@@ -23,8 +23,8 @@ Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
 void setup() {
   
   /* Configure serial output for debugging */
-  Serial.begin(115200);                   //start monitoring at 115,200 baud
-  delay(10);                              //delay to guarantee stuff shows in your monitor
+  Serial.begin(115200);
+  delay(10);
   
   /* Start the built-in NeoPixel RGB LED */
   pixels.begin();
@@ -44,7 +44,7 @@ void setup() {
  *    Handles changing the color of any NeoPixel. 
  *
  *  Want a specific color?
- *  -> Call setPixel and give it a number in the desired range...
+ *  -> Call setPixels and give it a number in the desired range...
  *      ORANGE:         0-100
  *      YELLOW:         100-200
  *      GREEN:          200-300
@@ -57,11 +57,14 @@ void setup() {
  *      DARK PINK:      900-1000
  *      RED:            1000-1024
  */
-void setPixel(int pixel, int color, long unsigned brightness){
-  brightness*=brightness;
-  brightness/=255;
-  pixels.setPixelColor(pixel, pixels.ColorHSV(color*64, 255, brightness));
+void setPixels(int color, long unsigned brightness){
 
+  /* Sets every NeoPixel to the color and brightness you chose */
+  for (int i=0; i<NUM_NEOPIXELS; i++){
+    brightness*=brightness;
+    brightness/=255;
+    pixels.setPixelColor(i, pixels.ColorHSV(color*64, 255, brightness));
+  }
   pixels.show();
 }
 
@@ -70,10 +73,13 @@ void setPixel(int pixel, int color, long unsigned brightness){
  * Helper function: 
  *    Turns the lights off on the NeoPixel
  */
-void pixelOff(void){
+void pixelsOff(void){
   pixels.clear();
-  pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
-  
+
+  /* Sets every NeoPixel to off */
+  for (int i=0; i<NUM_NEOPIXELS; i++){
+    pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
+  }
   pixels.show();
 }
 
@@ -82,24 +88,25 @@ void pixelOff(void){
  * Helper function:
  *    Cycles through all possible colors
  */
-void pixelColorCycle(int fade_speed, int cycleThreshold){ 
-  for (int j=0; j<1024; j++){    
-    for (int i=0; i<NUM_NEOPIXELS; i++){
-      setPixel(i, j, 255);
-    }
-    pixels.show();
+void pixelsColorCycle(int fade_speed, int cycleThreshold){
 
-    Serial.print("Current value being sent to setPixel: ");
-    Serial.println(j);
-    
-    delay(fade_speed);
-    
-    int sensorValue = analogRead(sensorPin);
-    if( sensorValue > cycleThreshold){
-      return;
+    /* Sets every NeoPixel to the specified color cycle */
+    for (int j=0; j<1024; j++){    
+      setPixels(j, 255);
+      pixels.show();
+
+      Serial.print("Current value being sent to setPixels: ");
+      Serial.println(j);
+      
+      delay(fade_speed);
+      
+      int sensorValue = analogRead(sensorPin);
+      if(sensorValue > cycleThreshold){
+        return;
+      }
+      
     }
     
-  }
 }
 
 
@@ -125,17 +132,17 @@ void loop(){
   /* Check whether the potentiometer is turned to the left to turn off light */
   if (sensorValue > offThreshold) 
   {
-    pixelOff();    
+    pixelsOff();
   }
   else if (sensorValue < cycleThreshold)
   {
     int speed = 100;                              //a larger number here means slower cycle
-    pixelColorCycle(speed, cycleThreshold);
-             
+    pixelsColorCycle(speed, cycleThreshold);
   }
   else
   {
-    setPixel(0, sensorValue, 255);              //change neopixel colors with potentiometer   
+    long unsigned brightness = 255;
+    setPixels(sensorValue, brightness);           //change neopixel colors with potentiometer   
   }
     
 }
