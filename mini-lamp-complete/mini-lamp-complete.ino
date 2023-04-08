@@ -122,12 +122,13 @@ void pixelsColorCycle(int fade_speed, int cycleThreshold){
 void loop(){
   
   /* Define the off and color cycle thresholds. These are between 0-1024 */
-  int offThreshold = 1020;                            //potentiometer turned all the way left
-  int cycleThreshold = 6;                             //potentiometer turned all the way right
+  int offThreshold = 1020;                        //potentiometer turned all the way left
+  int cycleThreshold = 6;                         //potentiometer turned all the way right
 
   /* Get the value of the potentiometer */
   int sensorValue = analogRead(sensorPin);        //read potentiometer value
   Serial.println(sensorValue);                    //tell us potentiometer value
+  
   
   /* Check whether the potentiometer is turned to the left to turn off light */
   if (sensorValue > offThreshold) 
