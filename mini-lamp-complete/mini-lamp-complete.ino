@@ -1,5 +1,5 @@
 /* Libraries */
-#include <Adafruit_NeoPixel.h>
+#include "src/Adafruit_NeoPixel/Adafruit_NeoPixel.h"
 
 /* Global variables and defines */
 #define   NUM_NEOPIXELS       1          //say how many RGB LEDs we have
