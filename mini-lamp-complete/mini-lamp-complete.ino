@@ -74,12 +74,9 @@ void setPixels(int color, long unsigned brightness){
  *    Turns the lights off on the NeoPixel
  */
 void pixelsOff(void){
-  pixels.clear();
-
+  
   /* Sets every NeoPixel to off */
-  for (int i=0; i<NUM_NEOPIXELS; i++){
-    pixels.setPixelColor(0, pixels.Color(0, 0, 0)); //turn neopixel off
-  }
+  pixels.clear();
   pixels.show();
 }
 
