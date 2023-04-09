@@ -5,7 +5,7 @@
 #define   NUM_NEOPIXELS       1          //say how many RGB LEDs we have
 int       ENABLE_INTERNAL =   11;        //power the internal neopixel
 int       RGB_DATA_IN =       12;        //address the internal neopixel
-const int sensorPin =         A0;        //pin that the poteniometer is on
+const int potentiometer =         A0;        //pin that the poteniometer is on
 
 /* Built-in NeoPixel RGB LED needs an object to be declared to work */
 Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
@@ -32,7 +32,7 @@ void setup() {
   digitalWrite(ENABLE_INTERNAL, HIGH);
   
   /* Start the pin that the potentiometer is connected to */
-  pinMode(sensorPin, INPUT);
+  pinMode(potentiometer, INPUT);
 }
 
 
@@ -100,8 +100,8 @@ void pixelsColorCycle(int fade_speed, int cycleThreshold){
       
       delay(fade_speed);
       
-      int sensorValue = analogRead(sensorPin);
-      if(sensorValue > cycleThreshold){
+      int potentiometerPosition = analogRead(potentiometer);
+      if(potentiometerPosition > cycleThreshold){
         return;
       }
       
@@ -126,16 +126,16 @@ void loop(){
   int cycleThreshold = 10;                         //potentiometer turned all the way right
 
   /* Get the value of the potentiometer */
-  int sensorValue = analogRead(sensorPin);        //read potentiometer value
-  Serial.println(sensorValue);                    //tell us potentiometer value
+  int potentiometerPosition = analogRead(potentiometer);        //read potentiometer value
+  Serial.println(potentiometerPosition);                    //tell us potentiometer value
   
   
   /* Check whether the potentiometer is turned to the left to turn off light */
-  if (sensorValue > offThreshold) 
+  if (potentiometerPosition > offThreshold) 
   {
     pixelsOff();
   }
-  else if (sensorValue < cycleThreshold)
+  else if (potentiometerPosition < cycleThreshold)
   {
     int speed = 100;                              //a larger number here means slower cycle
     pixelsColorCycle(speed, cycleThreshold);
@@ -143,7 +143,7 @@ void loop(){
   else
   {
     long unsigned brightness = 255;
-    setPixels(sensorValue, brightness);           //change neopixel colors with potentiometer   
+    setPixels(potentiometerPosition, brightness);           //change neopixel colors with potentiometer   
   }
     
 }
