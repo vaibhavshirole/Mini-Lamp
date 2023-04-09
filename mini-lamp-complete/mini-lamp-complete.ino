@@ -123,7 +123,7 @@ void loop(){
   
   /* Define the off and color cycle thresholds. These are between 0-1024 */
   int offThreshold = 1020;                        //potentiometer turned all the way left
-  int cycleThreshold = 6;                         //potentiometer turned all the way right
+  int cycleThreshold = 10;                         //potentiometer turned all the way right
 
   /* Get the value of the potentiometer */
   int sensorValue = analogRead(sensorPin);        //read potentiometer value
