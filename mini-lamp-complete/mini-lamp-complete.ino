@@ -1,3 +1,6 @@
+//==================//==================//==================//==================//
+// DECLARATIONS: 
+
 /* Libraries */
 #include "src/Adafruit_NeoPixel/Adafruit_NeoPixel.h"
 
@@ -5,7 +8,7 @@
 #define   NUM_NEOPIXELS       1          //say how many RGB LEDs we have
 int       ENABLE_INTERNAL =   11;        //power the internal neopixel
 int       RGB_DATA_IN =       12;        //address the internal neopixel
-const int potentiometer =         A0;        //pin that the poteniometer is on
+const int potentiometer =     A0;        //pin that the poteniometer is on
 
 /* Built-in NeoPixel RGB LED needs an object to be declared to work */
 Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
@@ -41,10 +44,10 @@ void setup() {
 
 /* 
  *  Helper function:
- *    Handles changing the color of any NeoPixel. 
+ *    Call this function to change the color of the NeoPixel
  *
  *  Want a specific color?
- *  -> Call setPixels and give it a number in the desired range...
+ *  -> Call setPixels and give it a number in the desired range:
  *      ORANGE:         0-100
  *      YELLOW:         100-200
  *      GREEN:          200-300
@@ -83,9 +86,9 @@ void pixelsOff(void){
 
 /*
  * Helper function:
- *    Cycles through all possible colors
+ *    Cycles through all possible colors automatically
  */
-void pixelsColorCycle(int fade_speed, int cycleThreshold){
+void pixelsColorCycle(int changeDelay, int cycleThreshold){
 
     /* Sets every NeoPixel to the specified color cycle */
     for (int j=0; j<1024; j++){    
@@ -95,8 +98,9 @@ void pixelsColorCycle(int fade_speed, int cycleThreshold){
       Serial.print("Current value being sent to setPixels: ");
       Serial.println(j);
       
-      delay(fade_speed);
-      
+      delay(changeDelay);
+
+      /* Check to see if potentiometer is out of the cycle threshold */
       int potentiometerPosition = analogRead(potentiometer);
       if(potentiometerPosition > cycleThreshold){
         return;
@@ -119,11 +123,11 @@ void pixelsColorCycle(int fade_speed, int cycleThreshold){
 void loop(){
   
   /* Define the off and color cycle thresholds. These are between 0-1024 */
-  int offThreshold = 1020;                        //potentiometer turned all the way left
-  int cycleThreshold = 10;                         //potentiometer turned all the way right
+  int offThreshold = 1020;                                  //turned all the way left
+  int cycleThreshold = 10;                                  //turned all the way right
 
   /* Get the value of the potentiometer */
-  int potentiometerPosition = analogRead(potentiometer);        //read potentiometer value
+  int potentiometerPosition = analogRead(potentiometer);    //read potentiometer value
   Serial.println(potentiometerPosition);                    //tell us potentiometer value
   
   
@@ -134,8 +138,8 @@ void loop(){
   }
   else if (potentiometerPosition < cycleThreshold)
   {
-    int speed = 100;                              //a larger number here means slower cycle
-    pixelsColorCycle(speed, cycleThreshold);
+    int changeDelay = 100;                                  //larger number means slower cycle
+    pixelsColorCycle(changeDelay, cycleThreshold);
   }
   else
   {
