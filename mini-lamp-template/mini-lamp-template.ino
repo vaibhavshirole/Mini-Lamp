@@ -91,14 +91,16 @@ void pixelsOff(void){
 void pixelsColorCycle(int changeDelay, int cycleThreshold){
 
     /* Sets every NeoPixel to the specified color cycle */
-    for (int j=0; j<1024; j++){    
-      setPixels(j, 255);
+    for (int j=0; j<1024; j++){
+      int brightness = 255;
+      
+      setPixels(j, brightness);
       pixels.show();
 
       Serial.print("Current value being sent to setPixels: ");
       Serial.println(j);
       
-      delay(changeDelay);
+      delay(changeDelay);   //milliseconds
 
       /* Check to see if potentiometer is out of the cycle threshold */
       int potentiometerPosition = analogRead(potentiometer);
