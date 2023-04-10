@@ -1,21 +1,19 @@
 //==================//==================//==================//==================//
-// DECLARATIONS: 
+/* DECLARATIONS: */
 
 /* Libraries */
 #include "src/Adafruit_NeoPixel/Adafruit_NeoPixel.h"
 
 /* Global variables and defines */
-#define   NUM_NEOPIXELS       1          //say how many RGB LEDs we have
-int       ENABLE_INTERNAL =   11;        //power the internal neopixel
-int       RGB_DATA_IN =       12;        //address the internal neopixel
-const int potentiometer =     A0;        //pin that the poteniometer is on
+#define   NUM_NEOPIXELS       1          /* say how many RGB LEDs we have */
+int       ENABLE_INTERNAL =   11;        /* power the internal neopixel */
+int       RGB_DATA_IN =       12;        /* address the internal neopixel */
+const int potentiometer =     // TO-DO: Find the pin that the potentiometer is connected to
 
-/* Built-in NeoPixel RGB LED needs an object to be declared to work */
-Adafruit_NeoPixel pixels(NUM_NEOPIXELS, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
-
+// TO-DO: Create the “pixels” object that lets you control the light on the microcontroller
 
 //==================//==================//==================//==================//
-// SETUP FUNCTIONS: 
+/* SETUP FUNCTIONS: */
 
 /*   
  *    This function is very important.
@@ -34,13 +32,12 @@ void setup() {
   pinMode(ENABLE_INTERNAL, OUTPUT);
   digitalWrite(ENABLE_INTERNAL, HIGH);
   
-  /* Start the pin that the potentiometer is connected to */
-  pinMode(potentiometer, INPUT);
+  // TO-DO: Start the pin that the potentiometer is connected to */
 }
 
 
 //==================//==================//==================//==================//
-// HELPER FUNCTIONS: 
+/* HELPER FUNCTIONS: */
 
 /* 
  *  Helper function:
@@ -49,16 +46,16 @@ void setup() {
  *  Want a specific color?
  *  -> Call setPixels and give it a number in the desired range:
  *      ORANGE:         0-100
- *      YELLOW:         100-200
- *      GREEN:          200-300
- *      TURIOISE:       300-400
- *      LIGHT BLUE:     400-500
- *      BLUE:           500-600
- *      DARK BLUE:      600-700
- *      PURPLE:         700-800
- *      PINK:           800-900
- *      DARK PINK:      900-1000
- *      RED:            1000-1024
+ *      YELLOW:         100 to 200
+ *      GREEN:          200 to 300
+ *      TURIOISE:       300 to 400
+ *      LIGHT BLUE:     400 to 500
+ *      BLUE:           500 to 600
+ *      DARK BLUE:      600 to 700
+ *      PURPLE:         700 to 800
+ *      PINK:           800 to 900
+ *      DARK PINK:      900 to 1000
+ *      RED:            1000 to 1024
  */
 void setPixels(int color, long unsigned brightness){
 
@@ -68,7 +65,7 @@ void setPixels(int color, long unsigned brightness){
     brightness/=255;
     pixels.setPixelColor(i, pixels.ColorHSV(color*64, 255, brightness));
   }
-  pixels.show();
+  pixels.show();        /* Make changes visible on the NeoPixel */
 }
 
 
@@ -79,8 +76,8 @@ void setPixels(int color, long unsigned brightness){
 void pixelsOff(void){
   
   /* Sets every NeoPixel to off */
-  pixels.clear();
-  pixels.show();
+  // TO-DO: Fill the whole NeoPixel strip with 0 / black / off
+  // TO-DO: Transmit pixel data in RAM to NeoPixels (basically, just make changes visible on the NeoPixel)
 }
 
 
@@ -95,12 +92,12 @@ void pixelsColorCycle(int changeDelay, int cycleThreshold){
       int brightness = 255;
       
       setPixels(j, brightness);
-      pixels.show();
+      pixels.show();                /* Make changes visible on the NeoPixel */
 
       Serial.print("Current value being sent to setPixels: ");
       Serial.println(j);
       
-      delay(changeDelay);   //milliseconds
+      delay(changeDelay);           /* Time in milliseconds */
 
       /* Check to see if potentiometer is out of the cycle threshold */
       int potentiometerPosition = analogRead(potentiometer);
@@ -114,7 +111,7 @@ void pixelsColorCycle(int changeDelay, int cycleThreshold){
 
 
 //==================//==================//==================//==================//
-// MAIN():
+/* MAIN(): */
 
 /*  
  *   This is the main function.
@@ -125,28 +122,28 @@ void pixelsColorCycle(int changeDelay, int cycleThreshold){
 void loop(){
   
   /* Define the off and color cycle thresholds. These are between 0-1024 */
-  int offThreshold = 1020;                                  //turned all the way left
-  int cycleThreshold = 10;                                  //turned all the way right
+  int offThreshold = 1020;                                  /* turned all the way left */
+  int cycleThreshold = 10;                                  /* turned all the way right */
 
   /* Get the value of the potentiometer */
-  int potentiometerPosition = analogRead(potentiometer);    //read potentiometer value
-  Serial.println(potentiometerPosition);                    //tell us potentiometer value
+  // TO-DO: Read potentiometer value
+  // TO-DO: Tell us the potentiometer value on the Serial Monitor
   
   
   /* Check whether the potentiometer is turned to the left to turn off light */
-  if (potentiometerPosition > offThreshold) 
+  if ( // TO-DO: Turn off the NeoPixel when potentiometer is turned to the left ) 
   {
-    pixelsOff();
+    pixelsOff();  // TO-DO: Finish this function
   }
-  else if (potentiometerPosition < cycleThreshold)
+  else if ( // TO-DO: Have the NeoPixel cycle through all colors when potentiometer is turned to the right )
   {
-    int changeDelay = 100;                                  //larger number means slower cycle
+    int changeDelay = 100;                                  /* larger number means slower cycle */
     pixelsColorCycle(changeDelay, cycleThreshold);
   }
   else
   {
     long unsigned brightness = 255;
-    setPixels(potentiometerPosition, brightness);           //change neopixel colors with potentiometer   
+    setPixels(potentiometerPosition, brightness);           /* change neopixel colors with potentiometer */  
   }
     
 }
