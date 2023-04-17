@@ -5,7 +5,7 @@
 #define   NEOPIXEL            0          //say how many RGB LEDs we have
 int       ENABLE_INTERNAL =   11;        //power the internal neopixel
 int       RGB_DATA_IN =       12;        //address the internal neopixel
-const int potentiometer =     A0;        //pin that the poteniometer is on
+// TO-DO #1: Write the code to connect the pin to the potentiometer
 
 /* Built-in NeoPixel RGB LED needs an object to be declared to work */
 Adafruit_NeoPixel pixels(NEOPIXEL+1, RGB_DATA_IN, NEO_GRB + NEO_KHZ800);
@@ -17,8 +17,7 @@ void setup() {
   delay(10);
   
   /* Start the built-in NeoPixel RGB LED */
-  pixels.begin();
-  pixels.show();
+  // TO-DO #2: Write pixels.begin(); to start the NeoPixel
   pinMode(ENABLE_INTERNAL, OUTPUT);
   digitalWrite(ENABLE_INTERNAL, HIGH);
   
@@ -53,19 +52,19 @@ void setup() {
 
 
 void loop(){
-  /* Define the off and color cycle thresholds. These are between 0-1024 */
-  int offValue = 500;                                  //turned to the left
-
-  /* Get the value of the potentiometer */
-  int potentiometerPosition = analogRead(potentiometer);    //read potentiometer value
-  Serial.println(potentiometerPosition);                    //tell us potentiometer value
-
   uint32_t red = pixels.Color(255, 0, 0);
   uint32_t green = pixels.Color(0, 255, 0);
   uint32_t blue = pixels.Color(0, 0, 255);
 
+  /* Define the off and color cycle thresholds. These are between 0-1024 */
+  int offValue = 500;                                  //turned to the left
+
+  /* Get the value of the potentiometer */
+  // TO-DO #n: Get the value of the potentiometer
+  // TO-DO #n+1: Display the value of the potentiometer on the Serial Monitor
+
   pixels.setBrightness(255);
-  
+
   if(potentiometerPosition > offValue)
   {
     pixels.setPixelColor(NEOPIXEL, red);
