@@ -16,13 +16,12 @@ void setup() {
   Serial.begin(115200);
   delay(10);
   
-  /* Start the built-in NeoPixel RGB LED */
   // TO-DO #2: Write pixels.begin(); to start the NeoPixel
   pinMode(ENABLE_INTERNAL, OUTPUT);
   digitalWrite(ENABLE_INTERNAL, HIGH);
   
-  /* Start the pin that the potentiometer is connected to */
-  pinMode(potentiometer, INPUT);
+  // TO-DO #3: Start the pin that the potentiometer is connected to
+  
 }
 
 
@@ -52,6 +51,8 @@ void setup() {
 
 
 void loop(){
+  // Want your own color? https://www.colorspire.com/rgb-color-wheel/
+                           // R   G   B
   uint32_t red = pixels.Color(255, 0, 0);
   uint32_t green = pixels.Color(0, 255, 0);
   uint32_t blue = pixels.Color(0, 0, 255);
@@ -60,20 +61,11 @@ void loop(){
   int offValue = 500;                                  //turned to the left
 
   /* Get the value of the potentiometer */
-  // TO-DO #n: Get the value of the potentiometer
-  // TO-DO #n+1: Display the value of the potentiometer on the Serial Monitor
+  // TO-DO #4: Get the value of the potentiometer
+  // TO-DO #5: Display the value of the potentiometer on the Serial Monitor
 
   pixels.setBrightness(255);
 
-  if(potentiometerPosition > offValue)
-  {
-    pixels.setPixelColor(NEOPIXEL, red);
-  }
-  else
-  {
-    pixels.clear();
-  }
-  
-  pixels.show();
+  // TO-DO #6: Use the potentiometer to turn the LED on and off
   
 }
