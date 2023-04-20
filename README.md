@@ -1,17 +1,20 @@
-This is the template code to be filled out for Coding a Cloud! 
+# This is the template code to be filled out for Coding a Cloud! 
 
-Working on the simple template?
-  - Step-by-step slides: https://docs.google.com/presentation/d/1Co_lDyZvRDkCf7edlSJlD2v2atJaDAp4FkVlVXxrrWE/edit?usp=sharing
+## Working on the simple template?
+  1. Step-by-step walkthrough: https://z.umn.edu/simple-lamp-guide
   
-  1. Here's the library to copy and you paste in
-  * https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
+  2. Copy and paste into the "Additional Boards Manager URLs"
+  > https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
   
-  2. Final step: Flash the complete code for the full experience
-  * https://raw.githubusercontent.com/vaibhavshirole/Mini-Lamp/main/hard-complete/hard-complete.ino
+  3. Copy and paste into your file if you want the full Mini Lamp experience
+  > https://raw.githubusercontent.com/vaibhavshirole/Mini-Lamp/main/hard-complete/hard-complete.ino
   
 
-Working on the hard template?
-  - Step-by-step slides: https://docs.google.com/presentation/d/1G0GE8hO3c_GQj3acG-DO2BD7uOZRdujS289UBTnxoVI/edit?usp=sharing 
+## Working on the hard template?
+  1. Step-by-step walkthrough: https://z.umn.edu/lamp-guide
+  
+  2. Copy and paste into the "Additional Boards Manager URLs"
+  > https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
-Want to know more about NeoPixels? 
-* https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use
+## Want to know more about NeoPixels? 
+> https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use
