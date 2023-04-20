@@ -24,7 +24,7 @@ void setup() {
   
 }
 
-
+int i;
 //void pixelsColorCycle(int changeDelay, int cycleThreshold){
 //
 //    /* Sets every NeoPixel to the specified color cycle */
