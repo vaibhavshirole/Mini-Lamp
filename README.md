@@ -6,7 +6,7 @@
 
         https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
-3. Copy and paste into your file if you want the full Mini Lamp experience
+3. Copy and paste the code at this link into your file if you want the full Mini Lamp experience
 
         https://raw.githubusercontent.com/vaibhavshirole/Mini-Lamp/main/hard-complete/hard-complete.ino
 
