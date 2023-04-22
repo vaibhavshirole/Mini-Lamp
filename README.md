@@ -7,10 +7,10 @@ So for this project, I designed and wrote a program that runs on an RP2040 to ha
 
 > The hardest part of reproducing this project is mass-producing the parts. Laser cutting, soldering, assembling boxes and the "clouds" took many hours and a number of volunteers. In total, we made around 60 lamps.  
 
-<figure>
-<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8616_Original.jpg?raw=true" alt= “” width="45%" height="100%">
-<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8627_Original.JPG?raw=true" alt= “” width="45%" height="100%">
-</figure>
+<p align="middle">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8616_Original.jpg?raw=true" alt= “” width="35%" height="100%">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8627_Original.JPG?raw=true" alt= “” width="35%" height="100%">
+</p>
 
 <br>
 
@@ -30,10 +30,10 @@ We also did this project with Shakopee High School, but got too side-tracked to 
 
 Each lamp needed a custom base to hold up the "cloud" part, and to do this, I re-learned Adobe Illustrator and cut out 50-60ish finger joint boxes out of 1/8-in MDF. 
 
-<figure>
+<p align="middle">
 <img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/sketch.png?raw=true" alt= “” width="45%" height="100%">
 <img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/laser-cutting-1.JPG?raw=true" alt= “” width="50%" height="100%">
-</figure>
+</p>
 
 **Soldering**
 
@@ -41,9 +41,9 @@ Every microcontroller needed it's headers soldered on, and every potentiometer h
 
 **Assembly**
 
-<figure>
-<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/assembly.JPG?raw=true" alt= “” width="85%" height="100%">
-</figure>
+<p align="middle">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/assembly.JPG?raw=true" alt= “” width="65%" height="100%">
+</p>
 
 <br>
 
@@ -60,6 +60,6 @@ The template branch is the branch that the students following the tutorial shoul
 
 The simple template is good for learning the basics of coding in C. The hard template was overwhelming after running this demo a few times due to how many helper functions there were and all of the comments. The hard template is a good way to learn about using functions within main(), but the simple template is a better starting point. 
 
-<figure>
+<p align="middle">
 <img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/slideshow.png?raw=true" alt= “” width="85%" height="100%">
-</figure>
+</p>
