@@ -41,6 +41,8 @@ Every microcontroller needed it's headers soldered on, and every potentiometer h
 
 **Assembly**
 
+Because there were so many lamps that had to be made for these events, I had a group of volunteers help me put everything together. I couldn't have done all of this by myself.
+
 <p align="middle">
 <img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/the-process/assembly.JPG?raw=true" alt= “” width="65%" height="100%">
 </p>
