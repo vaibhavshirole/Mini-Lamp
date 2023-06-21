@@ -8,8 +8,8 @@ So for this project, I designed and wrote a program that runs on an RP2040 to ha
 > The hardest part of reproducing this project is mass-producing the parts. Laser cutting, soldering, assembling boxes and the "clouds" took many hours and a number of volunteers. In total, we made around 60 lamps.  
 
 <p align="middle">
-<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8616_Original.jpg?raw=true" alt= “” width="35%" height="100%">
-<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8627_Original.JPG?raw=true" alt= “” width="35%" height="100%">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8616_Original.jpg?raw=true" alt= “mini-lamp-green” width="35%" height="100%">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/main/resources/images/IMG_8627_Original.JPG?raw=true" alt= “mini-lamp-purple” width="35%" height="100%">
 </p>
 
 <br>
@@ -17,7 +17,12 @@ So for this project, I designed and wrote a program that runs on an RP2040 to ha
 ## Outreach Events
 **CSE's Rooted in STEM**
 
-> (insert imgs when I get them)
+The main goal was to create a project for the high school students enrolled in CSE's Rooted in STEM program would be able to complete. With a bunch of help from some volunteers from the IEEE student group, we prepared the curriculum and had a successful event pitching how great electrical and computer engineering is. 
+
+<p align="middle">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/be6db6e02b544246a6dd28e080fe1b07519cbecf/resources/images/DSC_0018.jpeg" alt= “rooted-in-stem-1” width="35%" height="100%">
+<img src="https://github.com/vaibhavshirole/Mini-Lamp/blob/be6db6e02b544246a6dd28e080fe1b07519cbecf/resources/images/DSC_0020.jpeg" alt= “rooted-in-stem-2” width="35%" height="100%">
+</p>
 
 **Shakopee High School**
 
