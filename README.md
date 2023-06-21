@@ -1,5 +1,8 @@
 # Template to Code a Cloud!
 
+## Want to see what this project is all about? 
+1. Switch to the main branch [(it's at this this link)](https://github.com/vaibhavshirole/Mini-Lamp/tree/main)
+
 ## Working on the simple template?
 1. Step-by-step walkthrough: https://z.umn.edu/simple-lamp-guide
 2. Copy and paste into the "Additional Boards Manager URLs"
